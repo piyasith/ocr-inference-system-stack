@@ -76,10 +76,13 @@ docker push piyasith/ocr-api-gateway:latest
 
 #### a. Base Image Selection Rationale:
 
-Chose python:3.11-slim because:
-    It's small (~29MB) and secure.
-    Good balance between size and compatibility.
-    Easier to patch and maintain.
+Chose python:3.11-slim
+
+It's small (~29MB) and secure.
+
+Good balance between size and compatibility.
+
+Easier to patch and maintain.
 
 Using official Python images ensures long-term support and regular security patches.
 
