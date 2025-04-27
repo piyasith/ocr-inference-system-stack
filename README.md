@@ -27,7 +27,7 @@ All components inside Minikube cluster
 
 ---
 
-## 📁 Directory Structure
+## 🗂️ Directory Structure
 
 ```
 .
