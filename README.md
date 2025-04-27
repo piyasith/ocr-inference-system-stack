@@ -76,33 +76,33 @@ docker push piyasith/ocr-api-gateway:latest
 
 #### a. Base Image Selection Rationale:
 
-Chose python:3.11-slim
+- Chose python:3.11-slim
 
-It's small (~29MB) and secure.
+- It's small (~29MB) and secure.
 
-Good balance between size and compatibility.
+- Good balance between size and compatibility.
 
-Easier to patch and maintain.
+- Easier to patch and maintain.
 
-Using official Python images ensures long-term support and regular security patches.
+- Using official Python images ensures long-term support and regular security patches.
 
 #### b. Security Considerations:
 
-Minimize image size: slim variant reduces attack surface.
+- Minimize image size: slim variant reduces attack surface.
 
-Remove apt caches after installing (rm -rf /var/lib/apt/lists/*) to prevent layer bloating.
+- Remove apt caches after installing (rm -rf /var/lib/apt/lists/*) to prevent layer bloating.
 
-Non-root user (optional upgrade): you could run as a non-root user inside the container for extra security.
+- Non-root user (optional upgrade): you could run as a non-root user inside the container for extra security.
 
-Private repo: Docker Hub allows 1 free private repo — keeping your containers private is good practice.
+- Private repo: Docker Hub allows 1 free private repo — keeping your containers private is good practice.
 
 #### c. Build Optimization Techniques:
 
-Multi-stage builds.
+- Multi-stage builds.
 
-Layer caching: Copy pyproject.toml + poetry.lock first, install deps, then copy code — so deps don’t reinstall every rebuild unless they change.
+- Layer caching: Copy pyproject.toml + poetry.lock first, install deps, then copy code — so deps don’t reinstall every rebuild unless they change.
 
-No virtualenv inside container (poetry config virtualenvs.create false) — save disk/memory.
+- No virtualenv inside container (poetry config virtualenvs.create false) — save disk/memory.
 
 ---
 
