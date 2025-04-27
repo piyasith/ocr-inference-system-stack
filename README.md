@@ -27,6 +27,58 @@ All components inside Minikube cluster
 
 ---
 
+## 📁 Directory Structure
+
+```
+.
+├── argocd/
+│   ├── app-project.yaml            
+│   ├── application-api-gateway.yaml            
+│   └── application-model-server.yaml 
+|
+├── docker/
+│   ├── docker_build_test.sh            
+│   ├── docker-compose.yaml
+|   ├── Dockerfile.gateway        
+│   └── Dockerfile.model
+|
+├── helm-charts/
+│   ├── api-gateway/
+|   |   ├── templates/
+|   |   |   ├── api-gateway.yaml
+|   |   |   ├── configmap.yaml
+|   |   |   └── rbac.yaml
+|   |   ├── Chart.yaml
+|   |   └── values.yaml
+|   |   
+│   └── model-server/
+|       ├── templates/
+|       |   ├── model-server.yaml
+|       |   └── rbac.yaml
+|       ├── Chart.yaml
+|       └── values.yaml              
+│      
+├── infra_setup/
+│   ├── argocd-values.yaml            
+│   ├── grafana-values.yaml
+|   ├── prometheus-values.yaml        
+│   └── infra_setup.sh
+│    
+├── monitoring/                    
+│   └── grafana-dashboard.json
+│      
+├── api-gateway.py
+├── commands.sh
+├── images.jpeg
+├── index.yaml
+├── model.py
+├── poetry.lock
+├── pyproject.toml
+└── README.md 
+```
+
+---
+
 ## 🔍 Components
 
 | Component       | Purpose                           |
@@ -67,6 +119,7 @@ curl -X POST -F "image_file=@images.jepg" http://localhost:8001/gateway/ocr
 # Run the bash script to build and test the images
 bash docker_build_test.sh
 
+# Retag and push images to dockerhub
 docker tag model-server piyasith/ocr-model-server:latest
 docker push piyasith/ocr-model-server:latest
 
