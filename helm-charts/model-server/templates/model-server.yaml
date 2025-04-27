@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocr-model-server
+  namespace: ocr
+  labels:
+    app: model-server
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "8080"  
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: model-server
+  template:
+    metadata:
+      labels:
+        app: model-server
+    spec:
+      serviceAccountName: ocr-model-server-sa        
+      containers:
+        - name: model-server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20          
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocr-model-server-svc
+  namespace: ocr
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: model-server
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 8080

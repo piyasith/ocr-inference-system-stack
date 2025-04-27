@@ -1,0 +1,16 @@
+services:
+  model-server:
+    build:
+      dockerfile: Dockerfile.model
+    container_name: model-server
+    ports:
+      - "8080:8080"
+  
+  api-gateway:
+    build:
+      dockerfile: Dockerfile.gateway
+    container_name: api-gateway
+    ports:
+      - "8001:8001"
+    depends_on:
+      - model-server

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: ocr
+data:
+  KSERVE_URL: {{ .Values.configmap.kserveUrl | quote }}

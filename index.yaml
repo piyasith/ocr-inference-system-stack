@@ -1,0 +1,23 @@
+apiVersion: v1
+entries:
+  api-gateway:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-04-27T19:06:41.930223+05:30"
+    description: ocr api gateway helm chart
+    digest: 6b1ecaead41e7ac8cad85b50c54777a151bda107e9ae6750e2645a00b3273a31
+    name: api-gateway
+    urls:
+    - http://host.minikube.internal:8082/api-gateway-0.1.0.tgz
+    version: 0.1.0
+  model-server:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-04-27T19:06:41.93033+05:30"
+    description: ocr model server helm chart
+    digest: 72ca19f5da429a2782a4358fe1c199a89d4524f579b559b25201e3d2d5d85588
+    name: model-server
+    urls:
+    - http://host.minikube.internal:8082/model-server-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-04-27T19:06:41.929609+05:30"
