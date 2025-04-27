@@ -1,0 +1,66 @@
+{
+    "annotations": {
+      "list": []
+    },
+    "panels": [
+      {
+        "type": "stat",
+        "title": "Total Inference Requests",
+        "targets": [
+          {
+            "expr": "sum(rate(kserve_inference_request_count[1m]))",
+            "legendFormat": "Requests/sec"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 0, "w": 8, "h": 4 }
+      },
+      {
+        "type": "stat",
+        "title": "Inference Error Rate",
+        "targets": [
+          {
+            "expr": "sum(rate(kserve_inference_request_error_count[1m]))",
+            "legendFormat": "Errors/sec"
+          }
+        ],
+        "gridPos": { "x": 8, "y": 0, "w": 8, "h": 4 }
+      },
+      {
+        "type": "graph",
+        "title": "Inference Latency (p95)",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(kserve_inference_request_duration_seconds_bucket[5m])) by (le))",
+            "legendFormat": "Latency p95"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 4, "w": 16, "h": 6 }
+      },
+      {
+        "type": "graph",
+        "title": "Model Server CPU Usage",
+        "targets": [
+          {
+            "expr": "rate(container_cpu_usage_seconds_total{pod=~\"model-server.*\"}[1m])",
+            "legendFormat": "{{pod}}"
+          }
+        ],
+        "gridPos": { "x": 0, "y": 10, "w": 8, "h": 6 }
+      },
+      {
+        "type": "graph",
+        "title": "Model Server Memory Usage",
+        "targets": [
+          {
+            "expr": "container_memory_usage_bytes{pod=~\"model-server.*\"}",
+            "legendFormat": "{{pod}}"
+          }
+        ],
+        "gridPos": { "x": 8, "y": 10, "w": 8, "h": 6 }
+      }
+    ],
+    "schemaVersion": 30,
+    "title": "KServe Model Monitoring",
+    "timezone": "browser",
+    "version": 1
+  }
